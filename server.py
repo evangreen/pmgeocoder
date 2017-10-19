@@ -29,7 +29,7 @@ class GeocoderTestHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
 
         self.end_headers()
-        self.wfile.write(data)
+        self.wfile.write(data.encode('UTF-8'))
 
 # Serve requests forever.
 def serve():

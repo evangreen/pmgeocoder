@@ -1,6 +1,7 @@
-# This module implements the generic backend interface. Its methods are
-# overridden for a particular backend.
+# This module implements the generic backend interface. It is extended
+# for particular backends.
 
+import codecs
 from json import loads
 from settings import gcsettings
 
@@ -19,6 +20,7 @@ class GeocoderBackend:
         request = urlopen(url, data, gcsettings["timeout"])
         response = GeocoderBackendResponse()
         response.code = request.getcode()
-        response.raw = request.read()
+        reader = codecs.getreader("utf-8")
+        response.raw = reader(request).read()
         response.data = loads(response.raw)
         return response
