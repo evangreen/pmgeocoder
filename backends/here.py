@@ -1,3 +1,5 @@
+# Geocoder backend for here.com.
+
 from settings import gcsettings
 from backend import GeocoderBackend
 import pprint
@@ -21,6 +23,8 @@ class HereGeocoderBackend(GeocoderBackend):
         self.debug = gcsettings["debug"]
         return
 
+    # Execute an API request searching for a given free-form address, and return
+    # a GeocoderBackendResponse object.
     def lookup_address(self, address):
         qs = urlencode({'app_code': self.app_code,
                         'app_id': self.app_id,
@@ -38,6 +42,8 @@ class HereGeocoderBackend(GeocoderBackend):
 
         return response
 
+    # Given a geocoder backend response object, get a latitude and longitude
+    # from it.
     def lat_long(self, response):
         data = response.data
         views = data["Response"]["View"]

@@ -19,6 +19,8 @@ class GoogleGeocoderBackend(GeocoderBackend):
         self.debug = gcsettings["debug"]
         return
 
+    # Execute an API request searching for a given free-form address, and return
+    # a GeocoderBackendResponse object.
     def lookup_address(self, address):
         qs = urlencode({'api_key': self.api_key, 'address': address})
         url = "%s?%s" % (BASE_URL, qs)
@@ -33,6 +35,8 @@ class GoogleGeocoderBackend(GeocoderBackend):
 
         return response
 
+    # Given a geocoder backend response object, get a latitude and longitude
+    # from it.
     def lat_long(self, response):
         data = response.data
         results = data["results"]

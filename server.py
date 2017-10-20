@@ -45,6 +45,7 @@ def serve():
     httpd.server_close()
     return
 
+# Main loop, so this file can be run directly.
 if __name__ == '__main__':
     print("Serving requests on %s at port %d" %
           (gcsettings["server_host"], gcsettings["server_port"]))

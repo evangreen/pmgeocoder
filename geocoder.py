@@ -12,6 +12,9 @@ backends = [
     HereGeocoderBackend()
 ]
 
+# High level API for converting an address into latitude and longitude.
+# Returns a tuple of the latitude and longitude on success, or None, None if
+# there was a network error or there were no results.
 def address_to_lat_long(address):
     for backend in backends:
         try:
